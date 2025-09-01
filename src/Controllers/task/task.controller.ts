@@ -3,7 +3,7 @@ import { taskViewService } from 'src/Providers/task.provider';
 import { Task, taskView } from 'src/Entities/tasks';
 import { UpdateResult } from 'typeorm';
 import { SkipThrottle, ThrottlerGuard } from '@nestjs/throttler';
-import { ApiTags,ApiOperation,ApiResponse } from '@nestjs/swagger';
+import { ApiTags,ApiOperation,ApiResponse,ApiParam, ApiBody } from '@nestjs/swagger';
 
 @ApiTags('task')
 @Controller('task')
@@ -80,18 +80,64 @@ export class TaskController {
     }
   
     @Put(':id')
+    @ApiOperation({ summary: 'Update an existing task' })
+    @ApiParam({
+      name: 'id',
+      description: 'ID of the task to update',
+      type: 'number',
+    })
+    @ApiBody({
+      type: Task,
+      description: 'The partial task object with updated values',
+      examples: {
+        a: {
+          summary: 'A sample update',
+          value: {
+            title: 'Updated Task Title',
+            description: 'This is the new description.',
+          },
+        },
+      },
+    })
+    @ApiResponse({
+      status: 204,
+      description: 'The task has been successfully updated.',
+    })
+    @ApiResponse({ status: 404, description: 'Task not found.' })
     @HttpCode(204)
     public update(@Param('id', ParseIntPipe) id: number, @Body() userData: Partial<Task>): Promise<Task> {
       return this.TaskService.update(id, userData);
     }
 
     @Put('finish/:id')
+    @ApiOperation({ summary: 'Finish a task' })
+    @ApiParam({
+      name: 'id',
+      description: 'ID of the task to finish',
+      type: 'number',
+    })
+    @ApiResponse({
+      status: 204,
+      description: 'The task has been successfully finished.',
+    })
+    @ApiResponse({ status: 404, description: 'Task not found.' })
     @HttpCode(204)
     public finishTask(@Param('id', ParseIntPipe) id: number):Promise<UpdateResult>{
       return this.TaskService.finishTask(id);
     }
   
     @Delete(':id')
+    @ApiOperation({ summary: 'Delete a task' })
+    @ApiParam({
+      name: 'id',
+      description: 'ID of the task to delete',
+      type: 'number',
+    })
+    @ApiResponse({
+      status: 204,
+      description: 'The task has been successfully deleted.',
+    })
+    @ApiResponse({ status: 404, description: 'Task not found.' })
     @HttpCode(204)
     public remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
       return this.TaskService.remove(id);
