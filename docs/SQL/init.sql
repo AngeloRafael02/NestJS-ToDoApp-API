@@ -8,67 +8,21 @@ CREATE TABLE users (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     last_edited TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
-INSERT INTO users(
-    "firstName", 
-    "middleName",
-    "lastName", 
-    "email",
-    "passwdHash"
-) VALUES (
-    'Angelo Rafael',
-    'Fruto',
-    'Recio',
-    'recioangelorafael@gmail.com',
-    '1'
-);
-
 
 CREATE TABLE condition(
     id SERIAL PRIMARY KEY,
     stat VARCHAR(20) NOT NULL
 );
-INSERT INTO conditions(stat)
-VALUES
-    ('Unfinished'),
-    ('In Progress'),
-    ('Finished'),
-    ('Cancelled'),
-    ('Delayed'),
-    ('Continuous'),
-    ('On Hold'),
-    ('Speculation');
-
-
 
 CREATE INTO categories(
     id SERIAL PRIMARY KEY,
     cat VARCHAR(20) NOT NULL
 );
-INSERT INTO categories(cat)
-VALUES
-    ('Personal'),
-    ('Knowledge'),
-    ('Career'),
-    ('Automotive'),
-    ('IT'),
-    ('Government'),
-    ('Finance'),
-    ('Estate'),
-    ('Fitness'),
-    ('Health'),
-    ('Other')
-;
 
 CREATE TABLE threats(
     id SERIAL PRIMARY KEY,
     "level" VARCHAR(10)
 );
-INSERT INTO threats("level") VALUES
-('Low'),
-('Medium'),
-('High'),
-('Alarming'),
-('Inevitable');
 
 CREATE TABLE tasks(
     id SERIAL PRIMARY KEY,
