@@ -27,6 +27,6 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>('NESTJS_PORT');
-  await app.listen(port ?? 3000);
+  await app.listen(port || 3000);
 }
 bootstrap();
