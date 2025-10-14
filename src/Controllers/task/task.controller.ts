@@ -13,7 +13,7 @@ export class TaskController {
 
     @SkipThrottle()
     @Get('all/:idAll')
-    @ApiOperation({ summary: 'Get All Tasks Based in id' })
+    @ApiOperation({ summary: 'Get All Tasks (excluding Finished and Cancelled) Based in id number' })
     @ApiResponse({
       status: 200,
       description: 'All Tasks Based in id',
@@ -27,7 +27,7 @@ export class TaskController {
 
     @SkipThrottle()
     @Get('allFinished/:idAll')
-    @ApiOperation({ summary: 'Get All Finished Tasks Based in id' })
+    @ApiOperation({ summary: 'Get All Finished Tasks Based in id number' })
         @ApiResponse({
       status: 200,
       description: 'All Finished Tasks Based in id',
@@ -41,7 +41,7 @@ export class TaskController {
 
     @SkipThrottle()
     @Get('allCancelled/:idAll')
-    @ApiOperation({ summary: 'Get All Cancelled Tasks Based in id' })
+    @ApiOperation({ summary: 'Get All Cancelled Tasks Based in id number' })
         @ApiResponse({
       status: 200,
       description: 'All Cancelled Tasks Based in id',
@@ -54,20 +54,20 @@ export class TaskController {
     }
     
     @Get(':idOne')
-    @ApiOperation({ summary: 'Get One Specific Task Based in id' })
+    @ApiOperation({ summary: 'Get One Specific Task Based in id number' })
     @ApiResponse({
       status: 200,
       description: 'The Specific task record',
       type: taskView,
     })
-    @ApiResponse({ status: 404, description: 'Canceled Tasks not found.' })
+    @ApiResponse({ status: 404, description: 'No such task were found' })
     @HttpCode(200)
     public findOne(@Param('idOne', ParseIntPipe) id: number): Promise<taskView> {
       return this.TaskService.getOneFromID(id);
     }
   
     @Post()
-    @ApiOperation({ summary: 'Create a new task' })
+    @ApiOperation({ summary: 'Creates a new task' })
     @ApiResponse({
       status: 201,
       description: 'The task has been successfully created.',
@@ -80,7 +80,7 @@ export class TaskController {
     }
   
     @Put(':id')
-    @ApiOperation({ summary: 'Update an existing task' })
+    @ApiOperation({ summary: 'Update an existing task based on id number' })
     @ApiParam({
       name: 'id',
       description: 'ID of the task to update',
@@ -110,7 +110,7 @@ export class TaskController {
     }
 
     @Put('finish/:id')
-    @ApiOperation({ summary: 'Finish a task' })
+    @ApiOperation({ summary: `Mark a single task as 'Finished'` })
     @ApiParam({
       name: 'id',
       description: 'ID of the task to finish',
@@ -127,7 +127,7 @@ export class TaskController {
     }
   
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete a task' })
+    @ApiOperation({ summary: 'Deletes a singel task based on id number' })
     @ApiParam({
       name: 'id',
       description: 'ID of the task to delete',

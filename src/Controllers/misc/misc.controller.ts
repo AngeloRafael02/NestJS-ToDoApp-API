@@ -74,11 +74,11 @@ export class MiscController {
     status: 200,
     description: 'Count of Task depending on Categories',
   })
-  @Get('catGrouped/:uid')
+  @Get('catGrouped/:id')
   @HttpCode(200)
   @Header('Cache-Control', 'public, max-age=60')
-  public getTaskCategoryGrouped(@Param('uid', ParseIntPipe) uid:number){
-    return this.statsService.getCategoryGrouped(uid);
+  public getTaskCategoryGrouped(@Param('id', ParseIntPipe) id:number){
+    return this.statsService.getCategoryGrouped(id);
   }
 
   @ApiOperation({ summary: 'Gets Count of Tasks Depending based on Conditions' })
@@ -86,11 +86,11 @@ export class MiscController {
     status: 200,
     description: 'Count of Task depending on Conditions',
   })
-  @Get('statGrouped/:uid')
+  @Get('statGrouped/:id')
   @HttpCode(200)
   @Header('Cache-Control', 'public, max-age=60')
-  public getTaskStatusGrouped(@Param('uid', ParseIntPipe) uid:number){
-    return this.statsService.getConditionGrouped(uid);
+  public getTaskStatusGrouped(@Param('id', ParseIntPipe) id:number){
+    return this.statsService.getConditionGrouped(id);
   }
 
   @ApiOperation({ summary: 'Gets Count of Tasks Depending based on Threat Level' })
@@ -98,11 +98,11 @@ export class MiscController {
     status: 200,
     description: 'Count of Task depending on Threat Level',
   })
-  @Get('threatGrouped/:uid')
+  @Get('threatGrouped/:id')
   @HttpCode(200)
   @Header('Cache-Control', 'public, max-age=60')
-  public getTaskThreatLevelGrouped(@Param('uid', ParseIntPipe) uid:number){
-    return this.statsService.getThreatLevelGrouped(uid);
+  public getTaskThreatLevelGrouped(@Param('id', ParseIntPipe) id:number){
+    return this.statsService.getThreatLevelGrouped(id);
   }
 
 }
