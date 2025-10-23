@@ -30,6 +30,14 @@ export class miscService{
         private cacheManager:Cache
     ) {}
 
+    public getIntroduction(){
+        return `
+            This path is for miscellaneous stuff From Angelo Rafael
+            F. Recio's To Do App. It handles Column Headers and Drop Down
+            Items
+            `;
+    }
+
     public async findAllCat(): Promise<Categories[]> {
         this.logger.log('Categories Requested');
         return await this.cacheManager.get<Categories[]>('allCat') ?? await this.CatRepository.find();

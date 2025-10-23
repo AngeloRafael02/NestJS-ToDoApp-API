@@ -19,6 +19,14 @@ export class statsService{
         private TaskRepository:Repository<Task>
     ){}
 
+    public getIntroduction(){
+        return `
+            This path is for miscellaneous stuff From Angelo Rafael
+            F. Recio's To Do App. It handles grouped Data of the 
+            User's tasks based on Category, Status, or Threat Level.
+            `;
+    }
+
     public async getCategoryGrouped(id:number):Promise<{name:string, value:number}[]>{
         const result = await this.TaskRepository
             .createQueryBuilder('t') 

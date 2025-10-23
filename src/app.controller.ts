@@ -9,13 +9,13 @@ export class AppController {
     private readonly statsService:statsService
   ) {}
 
-  @Get()
+  @Get('ping')
   getPing(): string {
     return this.appService.ping();
   }
 
-  @Get('test')
-  public async getTest():Promise<unknown> {
-    return await this.statsService.getConditionGrouped(1);
+  @Get()
+  getIntroduction():string {
+    return this.appService.introduction();
   }
 }

@@ -32,6 +32,13 @@ export class taskViewService{
         private UserRepository: Repository<User>
     ){}
 
+    public getIntroduction(){
+        return `
+            This path is for miscellaneous stuff From Angelo Rafael
+            F. Recio's To Do App. It handles the tasks of the User.
+            `;
+    }
+
     public async getAllfromUID(id:number):Promise<taskView[]>{
         this.logger.log(`Retrieved All Tasks Based on uid: ${id}`)
         return await this.taskViewRepo.find({
