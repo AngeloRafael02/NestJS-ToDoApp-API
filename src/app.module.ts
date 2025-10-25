@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
 import { APP_GUARD } from '@nestjs/core';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 import { User } from './Entities/users';
 import { Conditions } from './Entities/conditions';
@@ -26,7 +28,11 @@ import { statsService } from './Providers/stats.provider';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal:true}),
+    ConfigModule.forRoot({ isGlobal: true }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public', 'docs'),
+      serveRoot: '/docs',
+    }),
     DatabaseModule,
     TypeOrmModule.forFeature([
       User,
@@ -35,13 +41,13 @@ import { statsService } from './Providers/stats.provider';
       Task,
       taskView,
       Threats,
-      task_logs
+      task_logs,
     ]),
     ThrottlerModule.forRoot({
       throttlers: [
-        { name: 'short', ttl: 1000, limit: 10},
+        { name: 'short', ttl: 1000, limit: 10 },
         { name: 'medium', ttl: 10000, limit: 25 },
-        { name: 'long', ttl: 60000, limit: 100 }
+        { name: 'long', ttl: 60000, limit: 100 },
       ],
     }),
     CacheModule.register({
@@ -49,14 +55,9 @@ import { statsService } from './Providers/stats.provider';
       max: 15, // Maximum number of items in cache
     }),
   ],
-  controllers: [
-    AppController,
-    MiscController,
-    TaskController,
-    UserController,
-  ],
+  controllers: [AppController, MiscController, TaskController, UserController],
   providers: [
-    AppService, 
+    AppService,
     miscService,
     taskViewService,
     UserService,

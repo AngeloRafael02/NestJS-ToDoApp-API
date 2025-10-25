@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        }   
+    </style>
+    <header>
+        <h1>NestJS-ToDoApp-API</h1>
+        <p>by Angelo Rafael F. Recio</p>
+    </header>
+    <hr/>
+    <nav>
+        <ul>
+            <li><a href="#About">About</a></li>
+            <li><a href="#Entities">Entities</a></li>
+            <li><a href="#Paths">Paths</a></li>
+        </ul>
+    </nav>
+    <hr/>
+    <section id="About">
+        <article>
+            <h3>About</h3>
+            <p>This is just a simple Demo of REST API for the authot's <a href="">Angular To Do APP</a>, powerd by NestJS, TypeORM, and PostgreSQL</p>
+        </article>
+    </section>
+    <hr/>
+    <section id="Entities">
+        <h3>Entities</h3>
+        <code>
+            // Task Entities <br>
+            const taskView = { <br>
+                ID:number, <br>
+                Title:string, <br>
+                Description:string, <br>
+                Category:string, <br>
+                Priority:number, <br>
+                "Threat Level":string, <br>
+                Status:string, <br>
+                Deadline:Date, <br>
+                "Created At":Date, <br>
+                "Last Edited":Date, <br>
+                SID:number, <br>
+                CID:number, <br>
+                UID:number, <br>
+                TID:number, <br>
+            } <br><br>
+
+            // Misc Entities <br>
+            const Categories = {id: number; cat: string;} <br>
+            const Conditions = {id: number; stat: string;} <br>
+            const ThreatLevel = {id: number; level: string;} <br>
+        </code>
+    </section>
+    <hr/>
+    <section id="Paths">
+        <h3>Paths</h3>
+        <table>
+            <caption>
+                <p>The table below shows all paths of the API</p>
+            </caption>
+            <thead>
+                <tr>
+                    <th>Path</th>
+                    <th>Sub-path</th>
+                    <th>Request</td>
+                    <th>Status</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/</td>
+                    <td>/</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Introduces the API and docs</td>
+                </tr>
+                <tr>
+                    <td>/task</td>
+                    <td>/</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets information about the &#39;/task&#39; Path</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets an existing task based in id number</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/</td>
+                    <td>POST</td>
+                    <td>Finished</td>
+                    <td>Creates a new task</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/(id)</td>
+                    <td>PUT</td>
+                    <td>Finished</td>
+                    <td>Update an existing task based on id number</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/(id)</td>
+                    <td>DELETE</td>
+                    <td>Finished</td>
+                    <td>Deletes a singel task based on id number</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/all/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Get All Tasks (excluding Finished and Cancelled) Based in id number</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/allFinished/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Get All Finished Tasks Based in id number</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/allCancelled/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Get All Cancelled Tasks Based in id number</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/finish/(id)</td>
+                    <td>PUT</td>
+                    <td>Finished</td>
+                    <td>Mark a single task as &#39;Finished&#39;</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/cancel/(id)</td>
+                    <td>PUT</td>
+                    <td>Finished</td>
+                    <td>Mark a single task as &#39;Canceled&#39;</td>
+                </tr>
+                <tr>
+                    <td>/misc</td>
+                    <td>/</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets information about the &#39;/misc&#39; Path</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/allCat</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Get all categories. Used Mostly for Categories Selections</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/allCond</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Get all conditions/status, Used mostly for Status Selections</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/allThreats</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Get all Threats Levels, Used mostly for Threat Level Selections</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/col/(table)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets all Column names for given Table, Used mostly for Table Headers</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/catGrouped/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets Count of Tasks Depending based on Categories</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/statGrouped/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets Count of Tasks Depending based on Conditions</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>/threatGrouped/(id)</td>
+                    <td>GET</td>
+                    <td>Finished</td>
+                    <td>Gets Count of Tasks Depending based on Threat Level</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </section>
+    <footer>
+
+    </footer>
+</body>
+</html>
